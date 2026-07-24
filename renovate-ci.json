@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Portfolio standard for repos whose CI runs on pull requests: Renovate merges its own non-major PRs once the checks are green. Majors and repos without a PR-triggered workflow stay manual.",
+  "extends": [
+    "local>phmatray/.github:renovate-base"
+  ],
+  "packageRules": [
+    {
+      "description": "Green CI is the safety net - let Renovate merge non-major updates itself. platformAutomerge is off on purpose: without a required status check GitHub refuses to arm auto-merge on an already-clean PR, which is exactly why the backlog piled up.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false,
+      "automergeStrategy": "squash"
+    }
+  ]
+}
