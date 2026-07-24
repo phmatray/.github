@@ -1,0 +1,59 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Portfolio standard: grouped non-major updates, majors gated behind the dependency dashboard, bounded PR flow. No automerge here - see the 'renovate-ci' preset for repos whose CI runs on pull requests.",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "Europe/Brussels",
+  "schedule": [
+    "before 9am on Saturday"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "dependencyDashboard": true,
+  "configMigration": true,
+  "rebaseWhen": "conflicted",
+  "minimumReleaseAge": "3 days",
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    {
+      "description": "One grouped PR for everything non-major",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "non-major dependencies"
+    },
+    {
+      "description": "Majors stay one-per-PR and are only opened once ticked on the dashboard",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true,
+      "automerge": false
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 9am on the first day of the month"
+    ]
+  },
+  "vulnerabilityAlerts": {
+    "description": "Security fixes ignore the schedule and are never grouped away",
+    "labels": [
+      "dependencies",
+      "security"
+    ],
+    "schedule": [
+      "at any time"
+    ],
+    "prPriority": 10,
+    "minimumReleaseAge": null
+  },
+  "osvVulnerabilityAlerts": true
+}
