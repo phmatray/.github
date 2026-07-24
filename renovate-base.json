@@ -52,7 +52,6 @@
     "schedule": [
       "at any time"
     ],
-    "prPriority": 10,
     "minimumReleaseAge": null
   },
   "osvVulnerabilityAlerts": true
